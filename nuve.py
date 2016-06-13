@@ -54,6 +54,7 @@ class Nuve:
 
 
     def send(self, method, body, url, params=None, username="", role=""):
+        print self, method, body, url
         if (params == None):
             service = self.service;
             key = self.key;
