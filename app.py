@@ -1,6 +1,7 @@
 import json
 
 from flask import Flask, render_template, request, jsonify
+from OpenSSL import SSL
 
 import nuve
 import config
@@ -40,5 +41,8 @@ def main():
 	return render_template("index.html")
 
 if __name__ == "__main__":
+    context = SSL.Context(SSL.SSLv23_METHOD)
+    context.use_privatekey_file('cert.key')
+    context.use_certificate_file('cert.crt')
     print "starting.. "
-	app.run(debug=True, host="0.0.0.0", port=2022)
+	app.run(debug=True, host="0.0.0.0", port=2022, ssl_context = context)
